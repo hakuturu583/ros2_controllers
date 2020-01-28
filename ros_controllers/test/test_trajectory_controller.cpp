@@ -61,7 +61,7 @@ protected:
 
     pub_node = std::make_shared<rclcpp::Node>("trajectory_publisher");
     trajectory_publisher = pub_node->create_publisher<trajectory_msgs::msg::JointTrajectory>(
-      controller_name + "/joint_trajectory");
+      controller_name + "/joint_trajectory", 1);
   }
 
   static void TearDownTestCase()
@@ -118,7 +118,7 @@ protected:
       duration_total = duration_total + duration;
     }
 
-    trajectory_publisher->publish(traj_msg_ptr);
+    trajectory_publisher->publish(*traj_msg_ptr);
   }
 
   std::string controller_name = "test_joint_trajectory_controller";
